@@ -1,0 +1,1 @@
+$PackageName$$MessageType$_$MessageItemName$	= $MessageItemIndex$,	//[$MessageItemModifier$] $Annotation$

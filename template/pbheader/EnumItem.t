@@ -1,0 +1,1 @@
+$EnumItemName$    = $EnumItemValue$,	$Annotation$

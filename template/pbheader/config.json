@@ -1,0 +1,37 @@
+{
+	"说明":"outputFileSuffix是输出文件的后缀 customTemplates是自定义模板配置",
+	"outputFileSuffix":".pb.h",
+	"customTemplates":
+	[
+		{
+			"说明":"示例 o_template是源模板 c_template是自定义的模板 files是要应用自定义模板的文件",
+			"o_template":"MessageItem.t",
+			"c_template":"MessageItem_xyz.t",
+			"files":
+			[
+				"xxxxx.proto",
+				"yyyyy.proto",
+				"zzzzz.proto"
+			]
+		},
+		{
+			"说明":"默认模板使用了缩减的枚举名，有时候会冲突，这个模板会使用完整的枚举名从而解决冲突",
+			"o_template":"Message.t",
+			"c_template":"custom/Message_FullEnumName.t",
+			"files":
+			[
+				"public_room_agent.proto"
+			]
+		},
+		{
+			"说明":"默认模板使用了缩减的枚举名，有时候会冲突，这个模板会使用完整的枚举名从而解决冲突",
+			"o_template":"Enum.t",
+			"c_template":"custom/Enum_FullEnumName.t",
+			"files":
+			[
+				"public_room_agent.proto"
+			]
+		}
+
+	]
+}

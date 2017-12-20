@@ -1,0 +1,1 @@
+    public $$member_name$;
