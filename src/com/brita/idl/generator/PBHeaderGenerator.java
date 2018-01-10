@@ -210,7 +210,7 @@ public class PBHeaderGenerator extends CodeGenerator{
         formater.addProperty("$EnumItemValue$", ""+memberNode.value);
 
         String annotation = getAnnotationInLine(memberNode.line);
-        formater.addProperty("$Annotation$", annotation==null?"":("//"+annotation));
+        formater.addProperty("$Annotation$", annotation==null?"":(annotation));
 
         return formater.format();
     }

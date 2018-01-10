@@ -1,1 +1,1 @@
-$EnumItemName$    = $EnumItemValue$,	$Annotation$
+$EnumItemName$    = $EnumItemValue$,	// $Annotation$
