@@ -1,6 +1,8 @@
 package com.brita.idl.generator;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import com.brita.idl.define.Define;
@@ -48,7 +50,7 @@ public abstract class CodeGenerator {
 	}
 	
 	
-	protected Set<Node> getNodes() {
+	protected List<Node> getNodes() {
 		return rootNode.getNodes();
 	}
 	

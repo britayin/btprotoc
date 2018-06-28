@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Main {
 
-    public static final String VERSION = "0.6";
+    public static final String VERSION = "0.9";
 
     public static void main(String[] args) {
 
@@ -73,7 +73,7 @@ public class Main {
 
                 if(total>1) System.out.println();
                 if(inputFile.isDirectory()) System.out.println("<"+total+">");
-                System.out.println("Compile File:"+inputFile.getAbsoluteFile());
+                System.out.println("Compile File:"+file.getAbsoluteFile());
 
 
                 FileReader reader = null;
@@ -93,6 +93,7 @@ public class Main {
                 } catch (Exception e) {
                     printlnError("Compile Failure:"+inputFile.getAbsoluteFile());
                     printlnRed(e.getMessage());
+                    e.printStackTrace();
                 } finally {
 
                     IOUtil.close(reader);

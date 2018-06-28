@@ -22,6 +22,7 @@ public class PBHeaderGenerator extends CodeGenerator{
 
     private Map<EnumNode, String> enumCodes = new HashMap<>();
     private Map<MessageNode, String> messageCodes = new HashMap<>();
+    private List<Node> codeNodeList = new ArrayList<>();
 
     public PBHeaderGenerator(File inputFile, RootNode rootNode) {
         super(inputFile, rootNode);
@@ -43,7 +44,7 @@ public class PBHeaderGenerator extends CodeGenerator{
             outputDir.mkdirs();
         }
 
-        Set<Node> nodes = getNodes();
+        List<Node> nodes = getNodes();
         if (nodes == null) {
             return true;
         }
@@ -60,6 +61,19 @@ public class PBHeaderGenerator extends CodeGenerator{
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        for (Node node : codeNodeList) {
+            String code = null;
+            if (enumCodes.containsKey(node)) {
+                code = enumCodes.get(node);
+            }else if (messageCodes.containsKey(node)) {
+                code = messageCodes.get(node);
+            }
+            if (code!=null) {
+                stringBuilder.append(code);
+                stringBuilder.append("\r\n");
+            }
+        }
+        /*
         for (EnumNode node : enumCodes.keySet()) {
             String code = enumCodes.get(node);
             if (code!=null){
@@ -75,6 +89,7 @@ public class PBHeaderGenerator extends CodeGenerator{
                 stringBuilder.append("\r\n");
             }
         }
+        */
 
         String tmplate = FileUtil.readFile(getTemplateFile("Header.t"));
 
@@ -142,6 +157,7 @@ public class PBHeaderGenerator extends CodeGenerator{
 
         //FileUtil.writeFile(code, new File(outputDir, modelNode.getName()+".java"));
         messageCodes.put(messageNode, code);
+        codeNodeList.add(messageNode);
 
         if (messageNode.models!=null) {
             for (MessageNode node : messageNode.models) {
@@ -180,6 +196,7 @@ public class PBHeaderGenerator extends CodeGenerator{
 
         //FileUtil.writeFile(code, new File(outputDir, modelNode.getName()+".java"));
         enumCodes.put(enumNode, code);
+        codeNodeList.add(enumNode);
 
         return code;
     }

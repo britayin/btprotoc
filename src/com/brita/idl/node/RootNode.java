@@ -2,26 +2,28 @@ package com.brita.idl.node;
 
 import com.brita.idl.token.Annotation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class RootNode extends Node{
 
-	private Set<Node> nodes;
+	private List<Node> nodes;
 
 	public PackageNode packageNode;
 
-	public Set<Annotation> annotations = new HashSet<>();
+	public List<Annotation> annotations = new ArrayList<>();
 
-	public Set<ImportNode> importNodes = new HashSet<>();
+	public List<ImportNode> importNodes = new ArrayList<>();
 
-	public Set<Node> getNodes() {
+	public List<Node> getNodes() {
 		return nodes;
 	}
 
 	public void addNode(Node node) {
 		if (nodes == null) {
-			nodes = new HashSet<Node>();
+			nodes = new ArrayList<Node>();
 		}
 		nodes.add(node);
 	}

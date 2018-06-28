@@ -14,8 +14,14 @@ public class Lexer {
 	int c = -1;
 	
 	public void parse(Reader reader, LexerOutput out) throws LexParserExeption{
-		
+
 		readChar(reader);
+
+		if (c == '\uFEFF') {
+			//带BOM的UTF-8
+			readChar(reader);
+		}
+
 		while( c!=-1 ) {
 			
 			if (c == '\n') {
