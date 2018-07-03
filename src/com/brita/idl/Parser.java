@@ -131,17 +131,17 @@ public class Parser {
 		
 		readPunctuation(output, '(');
 		
-		node.setRequestModel(getMessageNode(null, readIdentifier(output)));
-		
-		readPunctuation(output, ')');
-		
+		node.setRequestModel(getMessageNode(output));
+
+		readSymbolNode(output, ')', false);
+
 		readKeyWord(output, Define.RETURNS);
 		
 		readPunctuation(output, '(');
 		
-		node.setReturnModel(getMessageNode(null, readIdentifier(output)));
-		
-		readPunctuation(output, ')');
+		node.setReturnModel(getMessageNode(output));
+
+		readSymbolNode(output, ')', false);
 		
 		readPunctuation(output, ';');
 		
@@ -234,15 +234,18 @@ public class Parser {
 		String modifier = word.getText();
 		memberNode.setModifier(modifier);
 
-		List<String> messageName = readMessageName(output);
-		if (messageName.size() == 1) {
-			memberNode.setModelType(getMessageNode(null, messageName.get(0)));
-		}else if (messageName.size() > 1){
-			memberNode.setModelType(getMessageNode(messageName.subList(0, messageName.size()-2), messageName.get(messageName.size()-1)));
-		}
+//		List<String> messageName = readMessageName(output);
+//		if (messageName.size() == 1) {
+//			memberNode.setModelType(getMessageNode(null, messageName.get(0)));
+//		}else if (messageName.size() > 1){
+//			memberNode.setModelType(getMessageNode(messageName.subList(0, messageName.size()-2), messageName.get(messageName.size()-1)));
+//		}
+
+		memberNode.setModelType(getMessageNode(output));
 
 		if (!(word instanceof Identifier)) {
-			throw new ParserExeption(word, word.getText()+" is not a valid Identifier name");
+			//关键字作为标识符也放行吧
+			//throw new ParserExeption(word, word.getText()+" is not a valid Identifier name");
 		}
 
 		String name = word.getText();
@@ -366,6 +369,16 @@ public class Parser {
 			rootNode.annotations.add((Annotation)word);
 			word = output.read();
 		}
+	}
+
+	private  MessageNode getMessageNode(LexerOutput output) throws ParserExeption{
+		List<String> messageName = readMessageName(output);
+		if (messageName.size() == 1) {
+			return getMessageNode(null, messageName.get(0));
+		}else if (messageName.size() > 1){
+			return getMessageNode(messageName.subList(0, messageName.size()-2), messageName.get(messageName.size()-1));
+		}
+		return null;
 	}
 	
 	private MessageNode getMessageNode(List<String> packagePaths, String name) {
